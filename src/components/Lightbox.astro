@@ -1,0 +1,73 @@
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="" onerror="this.style.display='none'; document.getElementById('lightbox-placeholder').style.display='flex';" />
+    <div class="lightbox-placeholder" id="lightbox-placeholder">
+      <span class="font-mono" id="lightbox-placeholder-text"></span>
+    </div>
+    <div class="lightbox-info">
+      <h3 class="lightbox-title font-sans" id="lightbox-title"></h3>
+      <button class="lightbox-close" id="lightbox-close">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox")!;
+  const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+  const lightboxTitle = document.getElementById("lightbox-title")!;
+  const lightboxPlaceholder = document.getElementById("lightbox-placeholder")!;
+  const lightboxPlaceholderText = document.getElementById("lightbox-placeholder-text")!;
+  const lightboxClose = document.getElementById("lightbox-close")!;
+
+  function openLightbox(title: string, image: string) {
+    lightboxImg.src = image;
+    lightboxImg.alt = title;
+    lightboxImg.style.display = "block";
+    lightboxPlaceholder.style.display = "none";
+    lightboxPlaceholderText.textContent = title;
+    lightboxTitle.textContent = title;
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+    lightboxImg.src = "";
+  }
+
+  // Gallery piece clicks
+  document.querySelectorAll("[data-lightbox-trigger]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const title = el.getAttribute("data-piece-title") || "";
+      const image = el.getAttribute("data-piece-image") || "";
+      openLightbox(title, image);
+    });
+  });
+
+  // Close handlers
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  lightboxClose.addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  // Scroll-triggered section reveals
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+
+  document.querySelectorAll("[data-section]").forEach((section) => {
+    observer.observe(section);
+  });
+</script>

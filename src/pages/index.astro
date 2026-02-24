@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Footer from "../components/Footer.astro";
+import Lightbox from "../components/Lightbox.astro";
+import AboutModal from "../components/AboutModal.astro";
+
+import siteData from "../generated/site-data.json";
+
+const { site, sections } = siteData;
+const firstSectionId = sections[0]?.id || "";
+---
+
+<Base title="Made By Math(ewe)" description={site.tagline}>
+  <div id="top">
+    <Nav name={site.name} items={site.nav} firstSectionId={firstSectionId} />
+    <Hero
+      headline={site.hero.headline}
+      reveal={site.hero.reveal}
+      tagline={site.tagline}
+    />
+    <main class="main">
+      {sections.map((section, i) => (
+        <Section
+          id={section.id}
+          index={i}
+          title={section.title}
+          subtitle={section.subtitle}
+          description={section.description}
+          paper={section.paper}
+          pieces={section.pieces}
+        />
+      ))}
+    </main>
+    <Footer name={site.copyright} links={site.footer} pyfreeform={site.pyfreeform} />
+    <Lightbox />
+    <AboutModal about={site.about} links={site.footer} />
+  </div>
+</Base>

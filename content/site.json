@@ -1,0 +1,30 @@
+{
+  "name": "𝕄",
+  "copyright": "Mathewe Banda",
+  "tagline": "Math + Art",
+
+  "hero": {
+    "headline": "Made by Math",
+    "reveal": "ewe"
+  },
+
+  "about": [
+    "This is a collection of my art that explores the wonderful properties of mathematics.",
+    "I aim to make the complex approachable by making it visible, because why not?"
+  ],
+
+  "pyfreeform": {
+    "href": "https://matheweb.github.io/pyfreeform",
+    "logo": "/pyfreeform-logo.svg"
+  },
+
+  "nav": [
+    { "label": "Works",  "scrollTo": "first-section" },
+    { "label": "About",  "modal": "about" }
+  ],
+
+  "footer": [
+    { "label": "Personal Site", "href": "https://mathewe.com", "external": true },
+    { "label": "GitHub",        "href": "https://github.com/MatheweB", "external": true }
+  ]
+}

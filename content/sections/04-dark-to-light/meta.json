@@ -1,0 +1,8 @@
+{
+  "title": "Walking Lines",
+  "subtitle": "From Dark to Bright",
+  "description": "Starting at the darkest pixel of a downsampled image, we walk to the next darkest pixel and draw a line colored by the darker of the two. Repeat until reaching the brightest pixel. The outcome is surprisingly effective, though it struggles with busy or complex images.",
+  "pieces": [
+    { "image": "frankenstein.svg", "title": "Frankenstein" }
+  ]
+}

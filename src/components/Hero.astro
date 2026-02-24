@@ -1,0 +1,84 @@
+---
+interface Props {
+  headline: string;
+  reveal: string;
+  tagline: string;
+}
+
+const { headline, reveal, tagline } = Astro.props;
+const lines = headline.split("\n");
+const lastLine = lines[lines.length - 1];
+const lastSpace = lastLine.lastIndexOf(" ");
+const lastWord = lastLine.slice(lastSpace + 1);
+const lastLineStart = lastLine.slice(0, lastSpace);
+---
+
+<header class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title font-serif animate-fade-up delay-1">
+      {lines.slice(0, -1).map((line, i) => (
+        <>
+          {i > 0 && <br />}
+          {line}
+        </>
+      ))}
+      {lines.length > 1 && <br />}
+      {lastLineStart}{lastLineStart && " "}<span class="hero-reveal-wrap" data-reveal={reveal}>{lastWord}<span class="hero-reveal-text"></span><span class="hero-reveal-cursor">&#95;</span></span>
+    </h1>
+    <div class="hero-line" style="margin: 32px auto;" />
+    <p class="hero-tagline font-sans animate-fade-up delay-3">{tagline}</p>
+  </div>
+</header>
+
+<script>
+  const wrap = document.querySelector('.hero-reveal-wrap') as HTMLElement;
+  const textEl = wrap.querySelector('.hero-reveal-text') as HTMLElement;
+  const cursorEl = wrap.querySelector('.hero-reveal-cursor') as HTMLElement;
+  const fullText = wrap.dataset.reveal || '';
+  const SPEED = 120;
+
+  let current = '';
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  let typing = false;
+
+  function typeForward() {
+    typing = true;
+    if (current.length < fullText.length) {
+      current += fullText[current.length];
+      textEl.textContent = current;
+      timer = setTimeout(typeForward, SPEED);
+    } else {
+      typing = false;
+      timer = null;
+    }
+  }
+
+  function typeBackward() {
+    typing = true;
+    if (current.length > 0) {
+      current = current.slice(0, -1);
+      textEl.textContent = current;
+      timer = setTimeout(typeBackward, SPEED * 0.7);
+    } else {
+      typing = false;
+      timer = null;
+      cursorEl.classList.remove('visible');
+    }
+  }
+
+  function clearTimer() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    typing = false;
+  }
+
+  wrap.addEventListener('mouseenter', () => {
+    clearTimer();
+    cursorEl.classList.add('visible');
+    typeForward();
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    clearTimer();
+    typeBackward();
+  });
+</script>

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Astro
+dist/
+.astro/
+
+# Generated
+src/generated/
+public/content/
+
+# Artwork source
+papers/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store

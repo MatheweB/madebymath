@@ -1,0 +1,16 @@
+{
+  "name": "madebymath",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "content": "node build-content.js",
+    "dev": "npm run content && astro dev",
+    "build": "npm run content && astro build",
+    "preview": "npm run build && astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.2.0",
+    "svgo": "^4.0.0"
+  }
+}

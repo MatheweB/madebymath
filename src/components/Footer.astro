@@ -1,0 +1,51 @@
+---
+interface FooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  name: string;
+  links: FooterLink[];
+  pyfreeform?: { href: string; logo: string };
+}
+
+const { name, links, pyfreeform } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  {pyfreeform && (
+    <div class="footer-pyfreeform">
+      <span class="footer-pyfreeform-text font-sans">All art made with</span>
+      <a href={pyfreeform.href} class="footer-pyfreeform-link" target="_blank" rel="noopener noreferrer">
+        <img src={`${base}${pyfreeform.logo}`} alt="pyfreeform" class="footer-pyfreeform-logo" />
+        <span class="font-sans">pyfreeform</span>
+      </a>
+    </div>
+  )}
+  <div class="footer-inner">
+    <p class="footer-copy font-mono">&copy; {year} {name}</p>
+    <div class="footer-links">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="footer-link font-sans"
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+        >
+          {link.label}
+          {link.external && (
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

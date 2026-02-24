@@ -1,0 +1,75 @@
+---
+interface Props {
+  about: string[];
+  links: { label: string; href: string; external?: boolean }[];
+}
+
+const { about, links } = Astro.props;
+---
+
+<div class="about-drawer" id="about-drawer">
+  <div class="about-drawer-inner">
+    <div class="about-drawer-content">
+      {about.map((paragraph) => (
+        <p class="about-drawer-text font-sans">{paragraph}</p>
+      ))}
+    </div>
+    <div class="about-drawer-links">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="about-drawer-link font-sans"
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+        >
+          {link.label}
+          {link.external && (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const drawer = document.getElementById("about-drawer")!;
+  let isOpen = false;
+
+  function openDrawer() {
+    isOpen = true;
+    drawer.classList.add("open");
+  }
+
+  function closeDrawer() {
+    isOpen = false;
+    drawer.classList.remove("open");
+  }
+
+  function toggleDrawer() {
+    if (isOpen) closeDrawer();
+    else openDrawer();
+  }
+
+  // Nav link triggers
+  document.querySelectorAll('[data-about-trigger]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDrawer();
+    });
+  });
+
+  // Close on scroll
+  window.addEventListener('scroll', () => {
+    if (isOpen) closeDrawer();
+  }, { passive: true });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) closeDrawer();
+  });
+</script>

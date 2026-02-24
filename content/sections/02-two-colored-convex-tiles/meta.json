@@ -1,0 +1,18 @@
+{
+  "title": "Two-Colored Convex Tiles",
+  "subtitle": "Mosaic Image Rendering with Slider-Based Polygons",
+  "description": "Mosaic reproductions of photographs using two-colored convex quadrilateral tiles whose adjacent corners touch. A slider mechanism lets each tile grow or shrink in response to local brightness, producing recognizable images from a simple geometric vocabulary.",
+  "paper": {
+    "title": "Rendering Photos with Two-Colored Convex Tiles",
+    "file": "two-colored-convex-tiles.pdf"
+  },
+  "pieces": [
+    { "image": "frankenstein-hard-contrast.svg", "title": "Frankenstein Hard Contrast" },
+    { "image": "frankenstein-high-res.svg",      "title": "Frankenstein High Res" },
+    { "image": "frankenstein.svg",               "title": "Frankenstein" },
+    { "image": "marilyn-low-res.svg",            "title": "Marilyn Low Res" },
+    { "image": "marilyn.svg",                    "title": "Marilyn" },
+    { "image": "starry-night.svg",               "title": "Starry Night" },
+    { "image": "vader.svg",                      "title": "Vader" }
+  ]
+}

@@ -1,0 +1,53 @@
+---
+import PaperViewer from "./PaperViewer.astro";
+import GalleryPiece from "./GalleryPiece.astro";
+
+interface Piece {
+  id: string;
+  title: string;
+  image: string;
+}
+
+interface Paper {
+  title: string;
+  year?: string | null;
+  url: string;
+}
+
+interface Props {
+  id: string;
+  index: number;
+  title: string;
+  subtitle?: string | null;
+  description?: string;
+  paper?: Paper | null;
+  pieces: Piece[];
+}
+
+const { id, index, title, subtitle, description, paper, pieces } = Astro.props;
+const number = String(index + 1).padStart(2, "0");
+---
+
+<section class="section" id={id} data-section>
+  <div class="section-header">
+    <div class="section-number font-mono">{number}</div>
+    <div>
+      <h2 class="section-title font-serif">{title}</h2>
+      {subtitle && <div class="section-subtitle font-mono">{subtitle}</div>}
+    </div>
+  </div>
+
+  {description && <p class="section-description font-sans">{description}</p>}
+
+  {paper?.url && (
+    <PaperViewer title={paper.title} year={paper.year} url={paper.url} />
+  )}
+
+  <div class="gallery">
+    {pieces.map((piece) => (
+      <GalleryPiece id={piece.id} title={piece.title} image={piece.image} />
+    ))}
+  </div>
+
+  <div class="section-divider" />
+</section>

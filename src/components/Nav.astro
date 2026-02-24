@@ -1,0 +1,64 @@
+---
+interface NavItem {
+  label: string;
+  href?: string;
+  scrollTo?: string;
+  modal?: string;
+  external?: boolean;
+}
+
+interface Props {
+  name: string;
+  items: NavItem[];
+  firstSectionId: string;
+}
+
+const { name, items, firstSectionId } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav class="nav font-sans" id="main-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo font-serif">{name}</a>
+    <div class="nav-links">
+      {items.map((item) => (
+        <a
+          href={item.scrollTo ? `#${item.scrollTo === 'first-section' ? firstSectionId : item.scrollTo}` : item.href || '#'}
+          class="nav-link"
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+          data-scroll={item.scrollTo ? "" : undefined}
+          data-about-trigger={item.modal === 'about' ? "" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById("main-nav")!;
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 60);
+  }, { passive: true });
+
+  // Smooth scroll for in-page links
+  document.querySelectorAll('.nav-link[data-scroll]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = (link as HTMLAnchorElement).getAttribute('href');
+      if (href === '#top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href) {
+        document.querySelector(href)?.scrollIntoView({ block: 'start' });
+      }
+    });
+  });
+
+  // Logo scroll to top
+  document.querySelector('.nav-logo')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

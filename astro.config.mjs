@@ -7,6 +7,5 @@ import { defineConfig } from "astro/config";
 //   GitHub Pages (user.github.io/math-art)  →  "/math-art"
 
 export default defineConfig({
-  site: "https://matheweb.github.io",
-  base: "/madebymath",
+  site: "https://madebymath.art",
 });

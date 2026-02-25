@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { name, links, pyfreeform } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const year = new Date().getFullYear();
 ---
 

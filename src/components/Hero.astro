@@ -73,28 +73,30 @@ const lastLineStart = lastLine.slice(0, lastSpace);
   }
 
   // Desktop: hover
-  wrap.addEventListener('mouseenter', () => {
-    clearTimer();
-    cursorEl.classList.add('visible');
-    typeForward();
-  });
-
-  wrap.addEventListener('mouseleave', () => {
-    clearTimer();
-    typeBackward();
-  });
-
-  // Touch: tap to toggle
-  wrap.addEventListener('click', () => {
-    if (!isTouch) return;
-
-    clearTimer();
-
-    if (current.length === 0) {
+  if (!isTouch) {
+    wrap.addEventListener('mouseenter', () => {
+      clearTimer();
       cursorEl.classList.add('visible');
       typeForward();
-    } else {
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+      clearTimer();
       typeBackward();
-    }
-  });
+    });
+  }
+
+  // Touch: tap to toggle
+  if (isTouch) {
+    wrap.addEventListener('click', () => {
+      clearTimer();
+
+      if (current.length === 0) {
+        cursorEl.classList.add('visible');
+        typeForward();
+      } else {
+        typeBackward();
+      }
+    });
+  }
 </script>

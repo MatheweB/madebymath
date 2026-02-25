@@ -1,7 +1,7 @@
 {
   "title": "Two-Colored Convex Tiles",
   "subtitle": "Mosaic Image Rendering with Slider-Based Polygons",
-  "description": "Mosaic reproductions of photographs using two-colored convex quadrilateral tiles whose adjacent corners touch. A slider mechanism lets each tile grow or shrink in response to local brightness, producing recognizable images from a simple geometric vocabulary.",
+  "description": "We tile photographs with two-colored convex quadrilaterals whose corners touch their neighbors. A slider lets each tile grow or shrink based on local brightness. Simple geometry, recognizable images.",
   "paper": {
     "title": "Rendering Photos with Two-Colored Convex Tiles",
     "file": "two-colored-convex-tiles.pdf"

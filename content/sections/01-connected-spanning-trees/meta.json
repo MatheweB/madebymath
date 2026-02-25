@@ -1,7 +1,7 @@
 {
   "title": "Connected Spanning Trees",
   "subtitle": "Image Approximation via Graph Heuristics",
-  "description": "Greyscale images reconstructed as connected spanning trees on a grid, using king's and knight's moves. A simple heuristic—connect each vertex to its darkest neighbor—produces surprisingly faithful visual approximations.",
+  "description": "We reconstruct greyscale images as connected spanning trees on a grid using king's and knight's moves. The idea is simple: connect each vertex to its darkest neighbor. It works very well.",
   "paper": {
     "title": "Representing Images with Connected Spanning Trees",
     "file": "connected-spanning-trees.pdf"

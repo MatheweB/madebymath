@@ -1,7 +1,7 @@
 {
   "title": "Morphing Polygons",
   "subtitle": "Four-Sided Shapes in a Two-Color Checkerboard",
-  "description": "Each vertex in a checkerboard is free to move, optimally matching the underlying image brightness. The result reproduces photos surprisingly well—and the best part is you can play chess on them.",
+  "description": "We let each vertex in a checkerboard move freely to match the underlying image brightness. The result reproduces photos surprisingly well, and the best part is you can play chess on them!",
   "pieces": [
     { "image": "celtic-knot.svg", "title": "Celtic Knot" },
     { "image": "mona.svg",        "title": "Mona" },

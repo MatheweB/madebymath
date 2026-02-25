@@ -36,6 +36,7 @@ const lastLineStart = lastLine.slice(0, lastSpace);
   const cursorEl = wrap.querySelector('.hero-reveal-cursor') as HTMLElement;
   const fullText = wrap.dataset.reveal || '';
   const SPEED = 120;
+  const isTouch = window.matchMedia('(hover: none)').matches;
 
   let current = '';
   let timer: ReturnType<typeof setTimeout> | null = null;
@@ -71,6 +72,7 @@ const lastLineStart = lastLine.slice(0, lastSpace);
     typing = false;
   }
 
+  // Desktop: hover
   wrap.addEventListener('mouseenter', () => {
     clearTimer();
     cursorEl.classList.add('visible');
@@ -80,5 +82,19 @@ const lastLineStart = lastLine.slice(0, lastSpace);
   wrap.addEventListener('mouseleave', () => {
     clearTimer();
     typeBackward();
+  });
+
+  // Touch: tap to toggle
+  wrap.addEventListener('click', () => {
+    if (!isTouch) return;
+
+    clearTimer();
+
+    if (current.length === 0) {
+      cursorEl.classList.add('visible');
+      typeForward();
+    } else {
+      typeBackward();
+    }
   });
 </script>
